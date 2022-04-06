@@ -92,7 +92,7 @@ public class Fitness {
         for (Card card : swim) {
             System.out.println(card);
         }
-        System.out.println("Посетители групповых занятий");
+        System.out.println("Клиенты групповых занятий");
         for (Card card : groupLesson) {
             System.out.println(card);
         }
