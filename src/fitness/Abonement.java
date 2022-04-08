@@ -6,13 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 public enum Abonement {
 
-    ONE(1,"08:00:00","22:00:00",true,true,false), // однодневный
-    DAY(365,"08:00:00","16:00:00", false,true,true),// дневной
-    FULL(365,"08:00:00","22:00:00",true,true,true); // безлимитный
+    ONE(,"08:00:00","22:00:00",true,true, false), // однодневный
+    DAY(,"08:00:00","16:00:00", false,true, true),// дневной
+    FULL(,"08:00:00","22:00:00",true,true, true); // безлимитный
 
     // свойства
-    private LocalDate startDate;
-    private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
     private boolean swim;
@@ -20,24 +18,12 @@ public enum Abonement {
     private boolean groupLesson;
 
     // параметры для посещения
-    Abonement (int days, String startTime, String endTime, boolean swim, boolean gym, boolean groupLesson) {
-        startDate = LocalDate.now();
-        endDate = startDate.plusDays(days);
-        this.startTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        this.endTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+    Abonement(LocalTime startTime, LocalTime endTime, boolean swim, boolean gym, boolean groupLesson) {
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.swim = swim;
         this.gym = gym;
         this.groupLesson = groupLesson;
-    }
-
-    // геттер для даты регистрации
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    // геттер для даты истечения срока абонемента
-    public LocalDate getEndDate() {
-        return endDate;
     }
 
     // геттер для начала времени посещения
@@ -45,9 +31,19 @@ public enum Abonement {
         return startTime;
     }
 
+    // сеттер для начала времени посещения
+    public void setStartTime(String startTime) {
+        this.startTime = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+
     // геттер для конца времени посещения
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    // сеттер для конца времени посещения
+    public void setEndTime(String endTime) {
+        this.endTime = LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
     public boolean isSwim (){
@@ -62,16 +58,5 @@ public enum Abonement {
         return groupLesson;
     }
 
-    @Override
-    public String toString() {
-        return "Abonement{" +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", swim=" + swim +
-                ", gym=" + gym +
-                ", groupLesson=" + groupLesson +
-                '}';
-    }
+
 }

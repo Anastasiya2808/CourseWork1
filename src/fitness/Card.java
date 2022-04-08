@@ -1,14 +1,22 @@
 package fitness;
 
+import java.time.LocalDate;
+
 public class Card {
     private Abonement abonement;
     private Сlientele clientele;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Card (Abonement abonement, Сlientele clientele){
+    public Card(Abonement abonement, Сlientele clientele) {
+        startDate = LocalDate.now();
+        this.abonement = abonement;
         setClientele(clientele);
-        setAbonement(abonement);
+        if (abonement == Abonement.ONE){
+            endDate = LocalDate.now().plusDays(1);
+        } else
+            endDate = LocalDate.now().plusDays(180);
     }
-
     //геттер клиента
     public Сlientele getClientele() {
         return clientele;
@@ -31,11 +39,23 @@ public class Card {
         this.abonement = abonement;
     }
 
-    @Override
-    public String toString() {
-        return "Card{" +
-                "abonement=" + abonement +
-                ", clientele=" + clientele +
-                '}';
+    // геттер для даты регистрации
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    // cеттер для даты регистрации
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    // геттер для даты истечения срока абонемента
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    // сеттер для даты истечения срока абонемента
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }
